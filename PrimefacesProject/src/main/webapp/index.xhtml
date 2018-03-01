@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="template/ui.xhtml">
+	<ui:define name="body">
+		<h2>JSF with PrimeFaces 6.0 frameWork</h2>
+		<h4>PrimeFaces</h4>
+		<h:form>
+			<p:panel id="panel" header="New User">
+
+				<p:messages id="msgs" />
+
+				<h:panelGrid columns="3" cellpadding="5">
+					<p:outputLabel for="firstname" value="First name:" />
+					<p:inputText id="firstname" value="#{controller.userView.firstname}"
+						required="true" label="Firstname">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="firstname" display="icon" />
+
+					<p:outputLabel for="lastname" value="Last name:" />
+					<p:inputText id="lastname" value="#{controller.userView.lastname}"
+						label="Lastname" required="true">
+						<f:validateLength minimum="2" />
+						<p:ajax update="msgLastname" event="keyup" />
+					</p:inputText>
+					<p:message for="lastname" id="msgLastname" display="icon" />
+
+				</h:panelGrid>
+
+				<p:commandButton value="Save" update="panel"
+					actionListener="#{controller.save()}" icon="p:ui-icon-check" />
+				<p:commandButton value="Show" update="panel"
+					actionListener="#{controller.showData()}" icon="p:ui-icon-check" />
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
